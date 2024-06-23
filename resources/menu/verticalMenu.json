@@ -1,0 +1,16 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard"
+    },
+    {
+      "url": "/Pengaduan",
+      "name": "Pengaduan",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "pengaduan"
+    }
+]
+}

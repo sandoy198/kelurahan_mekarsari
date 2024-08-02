@@ -44,6 +44,20 @@ $container = ($container ?? 'container-xxl');
           @else
           <div class="{{$container}} flex-grow-1 container-p-y">
             @endif
+            @if (session('success'))
+                <script>
+                    successAlert('{{session('success')}}');
+                </script>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             @yield('content')
 

@@ -76,36 +76,21 @@
                                     </div>
                                     <hr class="my-4 mx-n4">
 
-                                    <form action="/BO/Pengaduan/Approve" method="post">
+                                    <form action="/BO/Tindakan/Approve" method="post">
                                         @csrf
                                         <input type="hidden" name="pengaduan_id" value="{{$pengaduan['pengaduan_id']}}">
                                         <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-default-message">Divisi
-                                                Tujuan</label>
+                                            <label class="col-sm-2 col-form-label" for="basic-default-message">Hasil Tindakan</label>
                                             <div class="col-sm-10">
-                                                <select class="form-select" id="divisi" name="divisi"
-                                                    aria-label="Default" onchange="changedivisi()">
-                                                    <option value="" selected="" hidden>Pilih Dibawah</option>
-                                                    @foreach ($divisi as $d)
-                                                        <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <textarea name="detail" id="basic-default-message" class="form-control"
+                                                    placeholder="Jelaskan secara singkat Tindakan yang dikerjakan"
+                                                    aria-label="Jelaskan secara singkat Tindakan yang dikerjakan" aria-describedby="basic-icon-default-message2"
+                                                    ></textarea>
                                             </div>
                                         </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-default-message">Penanggun
-                                                jawab</label>
+                                            <div class="row justify-content-end">
                                             <div class="col-sm-10">
-                                                <select class="form-select" id="users" name="users"
-                                                    aria-label="Default">
-                                                    <option value="" selected="" hidden>Pilih Dibawah</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Send</button>
+                                                <button type="submit" class="btn btn-primary">Selesai</button>
                                                 <button type="button" onclick="confirmCancel()"
                                                     class="btn btn-secondary">Cancel</button>
                                             </div>
@@ -139,6 +124,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);
                     const secondSelect = document.getElementById("users");
                     secondSelect.innerHTML = "";
 

@@ -1,0 +1,111 @@
+@php
+    $isNavbar = false;
+    $isMenu = false;
+    $navbarHideToggle = false;
+@endphp
+
+@extends('layouts/contentNavbarLayout')
+
+@section('title', 'Pengaduan Menu')
+
+@section('content')
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Periksa Status Pengaduan</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-xxl">
+                            <div class="card mb-4">
+                                <form action="/Pengaduan/PeriksaStatusPengaduan" method="post">
+                                    @csrf
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-message">Nomor
+                                                Pengaduan</label>
+                                            <div class="col-sm-10">
+                                                <textarea id="basic-default-message" class="form-control" placeholder="24xxxxxxxx" aria-label="24xxxxxxxx"
+                                                    name="nomorPengaduan" aria-describedby="basic-icon-default-message2"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-end">
+                                            <div class="col-sm">
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                    <a href="/" class="btn btn-secondary">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            @if (!empty($data['pengaduan']))
+                            @php
+                                $pengaduan = $data['pengaduan'];
+                            @endphp
+                                <div class="card">
+                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                        <h5 class="mb-0">Detail Pengaduan</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-name">Nama</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="basic-default-name"
+                                                    placeholder="John Doe" value="{{$pengaduan['nama']}}" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-company">Nomor
+                                                KTP</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="basic-default-company"
+                                                    placeholder="36***********."  value="{{$pengaduan['no_ktp']}}" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-company">Nomor
+                                                Telepon</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="basic-default-company"
+                                                    placeholder="08***********" value="{{$pengaduan['no_hp']}}" readonly />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-email">Email</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group input-group-merge">
+                                                    <input type="text" id="basic-default-email" class="form-control"
+                                                        placeholder="john.doe" aria-label="john.doe"
+                                                        aria-describedby="basic-default-email2" value="{{$pengaduan['email']}}" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-company">Detail</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="basic-default-company"
+                                                    placeholder="08***********" value="{{$pengaduan['detail']}}" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-company">Status</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="basic-default-company"
+                                                    placeholder="08***********" value="{{$pengaduan['status']}}" readonly />
+                                            </div>
+                                        </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('page-script')
+@endsection

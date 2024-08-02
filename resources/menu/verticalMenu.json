@@ -1,15 +1,15 @@
 {
   "menu": [
     {
-      "url": "/",
+      "url": "/BO",
       "name": "Dashboards",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard"
     },
     {
-      "url": "/Pengaduan",
+      "url": "/BO/Pengaduan",
       "name": "Pengaduan",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons bx bx-file-blank",
       "slug": "pengaduan"
     }
 ]

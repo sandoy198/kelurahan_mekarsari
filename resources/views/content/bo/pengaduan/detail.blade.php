@@ -1,7 +1,7 @@
 @php
     $isNavbar = false;
     $pengaduan = $data['pengaduan'];
-    $divisi = $data['divisi'];
+    $tindakan = $data['tindakan'];
 @endphp
 
 @extends('layouts/contentNavbarLayout')
@@ -15,7 +15,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Approve Pengaduan</h5>
+                        <h5 class="card-title">Detail Pengaduan</h5>
                     </div>
                     <div class="card-body">
                         <div class="col-xxl">
@@ -76,38 +76,46 @@
                                     </div>
                                     <hr class="my-4 mx-n4">
 
+                                    {{-- bikin table disini untuk loping tindakan --}}
+
+                                    <div class="table-responsive text-nowrap mb-3">
+                                        <table class="table table-bordered ">
+                                            <thead class="text-center">
+                                                <tr class="text-nowrap">
+                                                    <th class="col-1">#</th>
+                                                    <th class="col-2">Divisi Tujuan</th>
+                                                    <th class="col-1">Penanggung Jawab</th>
+                                                    <th class="col">Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-border-bottom-0">
+                                                @php
+                                                    $counter = 1;
+                                                @endphp
+                                                @if (!empty($tindakan))
+                                                    @foreach ($tindakan as $item)
+                                                        <tr>
+                                                            <th scope="row">{{ $counter++ }}</th>
+                                                            <td> {{ $item['divisiName'] }}</td>
+                                                            <td> {{ $item->user['name'] }}</td>
+                                                            <td> {{ $item['detail'] }}</td>
+                                                        </tr>
+                                                    @endforeach
+
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
                                     <form action="/BO/Pengaduan/Approve" method="post">
                                         @csrf
-                                        <input type="hidden" name="pengaduan_id" value="{{$pengaduan['pengaduan_id']}}">
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-default-message">Divisi
-                                                Tujuan</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-select" id="divisi" name="divisi"
-                                                    aria-label="Default" onchange="changedivisi()">
-                                                    <option value="" selected="" hidden>Pilih Dibawah</option>
-                                                    @foreach ($divisi as $d)
-                                                        <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-default-message">Penanggun
-                                                jawab</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-select" id="users" name="users"
-                                                    aria-label="Default">
-                                                    <option value="" selected="" hidden>Pilih Dibawah</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Send</button>
-                                                <button type="button" onclick="confirmCancel()"
-                                                    class="btn btn-secondary">Cancel</button>
+                                        <input type="hidden" name="pengaduan_id"
+                                            value="{{ $pengaduan['pengaduan_id'] }}">
+                                        <div class="row justify-content-center">
+                                            <div class="col">
+                                                <button type="button" onclick="window.history.back();"
+                                                    class="btn btn-secondary">Back</button>
                                             </div>
                                         </div>
                                     </form>
@@ -123,41 +131,5 @@
 @endsection
 
 @section('page-script')
-    <script>
-        function changedivisi() {
-            var divisi = document.getElementById('divisi').value;
 
-            fetch('/getUserByDivision', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        'divisi': divisi
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const secondSelect = document.getElementById("users");
-                    secondSelect.innerHTML = "";
-
-                    const defaultOption = document.createElement("option");
-                    defaultOption.value = "";
-                    defaultOption.textContent = "Pilih Dibawah";
-                    defaultOption.hidden = true;
-                    secondSelect.appendChild(defaultOption);
-
-                    data.forEach(option => {
-                        optionElement = document.createElement("option");
-                        optionElement.value = option.id;
-                        optionElement.textContent = option.name;
-                        secondSelect.appendChild(optionElement);
-                    });
-
-                })
-                .catch(error => console.error('Error:', error));
-
-        }
-    </script>
 @endsection

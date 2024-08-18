@@ -1,5 +1,8 @@
 @php
     $isNavbar = false;
+    $pengaduan = $data['pengaduan'];
+    $divisi = $data['divisi'];
+
 @endphp
 
 @extends('layouts/contentNavbarLayout')
@@ -18,12 +21,12 @@
                     <div class="card-body">
                         <div class="col-xxl">
                             <div class="card mb-4">
-                                <form action="/BO/Pengaduan/Approve" method="post">
+                                <form action="/BO/Pengaduan/Reject" method="post">
                                     @csrf
                                     <input type="hidden" name="pengaduan_id" value="{{ $pengaduan['pengaduan_id'] }}">
                                     <div class="card-body">
                                         <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="detail">Message</label>
+                                            <label class="col-sm-2 col-form-label" for="detail">Detail</label>
                                             <div class="col-sm-10">
                                                 <textarea id="detail" class="form-control" name="detail" placeholder="Masukan Detail !"
                                                     aria-label="Masukan Detail !" aria-describedby="basic-icon-default-message2"></textarea>

@@ -44,6 +44,9 @@
                                                 @elseif ($item['status']=='Proses')
                                                     <td align="center"> <a class="bx bxs-check-square" href="Tindakan/Approve/{{ $item['pengaduan_id'] }}"></a></td>
                                                     <td align="center"> <a class="bx bxs-x-square  " href="Tindakan/Reject/{{ $item['pengaduan_id'] }}"></a></td>
+                                                @elseif ($item['status']=='Reject Tindakan')
+                                                    <td align="center"> <a class="bx bxs-check-square" href="Pengaduan/Approve/{{ $item['pengaduan_id'] }}"></a></td>
+                                                    <td align="center"> <a class="bx bxs-x-square  " href="Pengaduan/Reject/{{ $item['pengaduan_id'] }}"></a></td>
                                                 @else
                                                     <td align="center"> </td>
                                                     <td align="center"> </td>

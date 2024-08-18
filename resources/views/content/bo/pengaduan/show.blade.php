@@ -2,6 +2,7 @@
     $isNavbar = false;
     $isMenu = false;
     $navbarHideToggle = false;
+
 @endphp
 
 @extends('layouts/contentNavbarLayout')
@@ -43,6 +44,7 @@
                             @if (!empty($data['pengaduan']))
                             @php
                                 $pengaduan = $data['pengaduan'];
+                                $tindakan = $data['tindakan'];
                             @endphp
                                 <div class="card">
                                     <div class="card-header d-flex align-items-center justify-content-between">
@@ -97,6 +99,38 @@
                                                     placeholder="08***********" value="{{$pengaduan['status']}}" readonly />
                                             </div>
                                         </div>
+                                        <hr class="my-4 mx-n4">
+
+                                    {{-- bikin table disini untuk loping tindakan --}}
+
+                                    <div class="table-responsive text-nowrap mb-3">
+                                        <table class="table table-bordered ">
+                                            <thead class="text-center">
+                                                <tr class="text-nowrap">
+                                                    <th class="col-1">#</th>
+                                                    <th class="col-2">Divisi Tujuan</th>
+                                                    <th class="col-1">Penanggung Jawab</th>
+                                                    <th class="col">Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-border-bottom-0">
+                                                @php
+                                                    $counter = 1;
+                                                @endphp
+                                                @if (!empty($tindakan))
+                                                    @foreach ($tindakan as $item)
+                                                        <tr>
+                                                            <th scope="row">{{ $counter++ }}</th>
+                                                            <td> {{ $item['divisiName'] }}</td>
+                                                            <td> {{ $item->user['name'] }}</td>
+                                                            <td> {{ $item['detail'] }}</td>
+                                                        </tr>
+                                                    @endforeach
+
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             @endif
                         </div>

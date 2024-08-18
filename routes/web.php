@@ -21,11 +21,13 @@ Route::get('/BO/Pengaduan', [PengaduanController::class,'index'])->middleware('a
 Route::get('/BO/Pengaduan/Approve/{id}', [PengaduanController::class,'approveForm'])->middleware('auth')->name("pengaduan.approve.get");
 Route::post('/BO/Pengaduan/Approve', [PengaduanController::class,'approve'])->middleware('auth')->name("pengaduan.approve.post");
 Route::get('/BO/Pengaduan/Reject/{id}', [PengaduanController::class,'rejectForm'])->middleware('auth')->name("rejectpengaduan");
+Route::post('/BO/Pengaduan/Reject', [PengaduanController::class,'reject'])->middleware('auth')->name("pengaduan.reject.post");
 Route::get('/download/{pengaduan_id}', [PengaduanController::class, 'downloadImage'])->name('download.image');
 
 Route::get('/BO/Tindakan/Approve/{id}', [TindakanController::class,'approveForm'])->middleware('auth')->name("tindakan.approve.form");
 Route::post('/BO/Tindakan/Approve', [TindakanController::class,'approve'])->middleware('auth')->name("tindakan.approve.post");
 Route::get('/BO/Tindakan/Reject/{id}', [TindakanController::class,'rejectForm'])->middleware('auth')->name("rejecttindakan");
+Route::post('/BO/Tindakan/Reject', [TindakanController::class,'reject'])->middleware('auth')->name("tindakan.reject.post");
 
 //punya masyarakat
 Route::get('/', [HomeController::class,'indexMasyarakat'])->name("indexMasyarakat");

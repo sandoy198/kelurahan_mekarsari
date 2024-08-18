@@ -23,8 +23,7 @@ class PengaduanController extends Controller
 
         $user = Auth::user();
         // dd($user);
-        if($user['role_id'] == 0){
-
+        if ($user['role_id'] == 0) {
         }
         $pengaduanList = Pengaduan::paginate(10);
 
@@ -96,17 +95,26 @@ class PengaduanController extends Controller
      */
     public function show(Request $request, Pengaduan $pengaduan)
     {
-
         $pengaduan = null;
+        $tindakan = null;
         if ($request['nomorPengaduan'] != '') {
             $pengaduan = Pengaduan::where('nomor_pengaduan', $request['nomorPengaduan'])->first();
+            if ($pengaduan != null) {
+                $tindakan = $pengaduan->tindakan;
+                foreach ($tindakan as $t) {
+
+                    $divisi = new Divisi();
+                    $divisiName = $divisi->getDivisionAttribute($t->user->divisi);
+                    $t['divisiName'] = $divisiName;
+                }
+            }
         }
 
         $data = [
-            "pengaduan" => $pengaduan
+            "pengaduan" => $pengaduan,
+            "tindakan" => $tindakan,
         ];
 
-        // dd($pengaduan);
 
         return view($this->viewLocationBO . "/pengaduan/show", compact("data"));
     }
@@ -124,13 +132,13 @@ class PengaduanController extends Controller
         //
     }
 
-    public function approveForm($id,Request $request)
+    public function approveForm($id, Request $request)
     {
         $pengaduan = Pengaduan::find($id);
         $divisi = new Divisi();
         $alldivisi = $divisi->getDivisionAttribute();
 
-        $data =[
+        $data = [
             'pengaduan' => $pengaduan,
             'divisi' => $alldivisi
         ];
@@ -159,7 +167,7 @@ class PengaduanController extends Controller
 
         $tindakan = Tindakan::create([
             'pengaduan_id' => $pengaduan->pengaduan_id,
-            'user_id' => $request['users']
+            'user_id' => $request['users'],
         ]);
 
         return redirect()
@@ -167,19 +175,18 @@ class PengaduanController extends Controller
             ->with('success', 'Pelaporan telah di Approve dan Assign ');
     }
 
-    public function rejectForm($id,Pengaduan $pengaduan)
+    public function rejectForm($id, Pengaduan $pengaduan)
     {
         $pengaduan = Pengaduan::find($id);
         $divisi = new Divisi();
         $alldivisi = $divisi->getDivisionAttribute();
 
-        $data =[
+        $data = [
             'pengaduan' => $pengaduan,
             'divisi' => $alldivisi
         ];
 
         return view($this->viewLocationBO . "/pengaduan/rejectForm", compact("data"));
-
     }
 
     public function reject(Request $request, Pengaduan $pengaduan)
@@ -197,16 +204,17 @@ class PengaduanController extends Controller
         $pengaduan = Pengaduan::find($request['pengaduan_id']);
         $pengaduan->status = 'Reject';
         $pengaduan->save();
+        $user = Auth::user();
 
         $tindakan = Tindakan::create([
             'pengaduan_id' => $pengaduan->pengaduan_id,
-            'user_id' => $request['users']
+            'user_id' => $user['id'],
+            'detail' => $request['detail']
         ]);
 
         return redirect()
             ->route('pengaduan')
             ->with('success', 'Pelaporan telah di Reject ');
-
     }
 
     /**
@@ -243,12 +251,12 @@ class PengaduanController extends Controller
 
         $pengaduan = Pengaduan::find($pengaduan_id);
         $tindakan = $pengaduan->tindakan;
-        foreach ($tindakan as $t){
+        foreach ($tindakan as $t) {
 
             $divisi = new Divisi();
             $divisiName = $divisi->getDivisionAttribute($t->user->divisi);
             $t['divisiName'] = $divisiName;
-       }
+        }
 
         $data = [
             "pengaduan" => $pengaduan,

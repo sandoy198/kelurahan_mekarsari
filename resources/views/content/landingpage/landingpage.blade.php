@@ -11,7 +11,8 @@
 @section('content')
     <!-- Showcase -->
     <header class="bg-primary text-white text-center py-5 mb-4"
-    style="background-image: url('{{ asset('assets/img/front-pages/branding/headerbackground.jpg') }}'); background-repeat: no-repeat; background-position: center; background-size: cover;">        <div class="container">
+        style="background-image: url('{{ asset('assets/img/front-pages/branding/headerbackground.jpg') }}'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class="container">
             <h1 class="display-4">Selamat Datang di Portal Pengaduan Kelurahan Mekarsari</h1>
             <p class="lead">Tempat melaporkan dan memantau laporan masyarakat</p>
         </div>
@@ -47,14 +48,30 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h2>About Us</h2>
-                    <p> Mekarsari adalah ibu kota kecamatan Neglasari, Kota Tangerang, Banten, Indonesia. Mekarsari terdiri
-                        atas 33 rukun tetangga dan 6 rukun warga. Komunitas Cina Benteng tinggal di kelurahan ini. di
-                        kelurahan mekarsari terdapat 2 sekolahan anak usia dini slah satunya PAUD AL SABILILLAH. dan makanan
-                        dan minuman khas mekarsari kemungkinan masih berkutik di keturunan china seperti dodol dan minuman
-                        rossale dan di kelurahan mekarsari terdapat KUA dan sekolah dasar negeri. </p>
-                </div>
+                    <p> Rajeg adalah sebuah kecamatan yang terletak di Kabupaten Tangerang, Provinsi Banten, Indonesia.
+                        Kecamatan Rajeg memiliki luas wilayah 61.059 ha. Kecamatan Rajeg berbatasan dengan KecamatanMauk di
+                        Utara dan dengan Kecamatan Pasar Kemis di selatan. </p>
+                    <p>Pusat pemerintahan kecamatan ini berada di Desa Mekarsari, walaupun ada yang sudah menjadi status kelurahan, yaitu Kelurahan Sukatani.
+
+                        Kecamatan ini terdiri dari 1 kelurahan dan 12 desa, yaitu:
+
+                        Kelurahan Sukatani
+                        Desa Jambukarya
+                        Desa Daon
+                        Desa Rancabango
+                        Desa Rajeg Mulya
+                        Desa Rajeg
+                        Desa Sukamanah
+                        Desa Pangarengan
+                        Desa Tanjakan
+                        Desa Tanjakan Mekar
+                        Desa Sukasari
+                        Desa Mekarsari
+                        Desa Lembangsari</p>
+                    </div>
                 <div class="col-lg-6">
-                    <img src="{{ asset('assets/img/front-pages/landing-page/aboutus.jpg') }}" class="img-fluid" alt="About us">
+                    <img src="{{ asset('assets/img/front-pages/landing-page/aboutus.jpg') }}" class="img-fluid"
+                        alt="About us">
                 </div>
             </div>
         </div>

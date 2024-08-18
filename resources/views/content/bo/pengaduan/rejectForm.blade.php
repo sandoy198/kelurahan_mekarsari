@@ -18,23 +18,15 @@
                     <div class="card-body">
                         <div class="col-xxl">
                             <div class="card mb-4">
-                                <form>
+                                <form action="/BO/Pengaduan/Approve" method="post">
+                                    @csrf
+                                    <input type="hidden" name="pengaduan_id" value="{{ $pengaduan['pengaduan_id'] }}">
                                     <div class="card-body">
                                         <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-default-phone">Phone
-                                                No</label>
+                                            <label class="col-sm-2 col-form-label" for="detail">Message</label>
                                             <div class="col-sm-10">
-                                                <input type="text" id="basic-default-phone"
-                                                    class="form-control phone-mask" placeholder="658 799 8941"
-                                                    aria-label="658 799 8941" aria-describedby="basic-default-phone" />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label"
-                                                for="basic-default-message">Message</label>
-                                            <div class="col-sm-10">
-                                                <textarea id="basic-default-message" class="form-control" placeholder="Hi, Do you have a moment to talk Joe?"
-                                                    aria-label="Hi, Do you have a moment to talk Joe?" aria-describedby="basic-icon-default-message2"></textarea>
+                                                <textarea id="detail" class="form-control" name="detail" placeholder="Masukan Detail !"
+                                                    aria-label="Masukan Detail !" aria-describedby="basic-icon-default-message2"></textarea>
                                             </div>
                                         </div>
                                         <div class="row justify-content-end">

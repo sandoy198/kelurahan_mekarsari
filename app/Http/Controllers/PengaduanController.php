@@ -167,13 +167,46 @@ class PengaduanController extends Controller
             ->with('success', 'Pelaporan telah di Approve dan Assign ');
     }
 
-    public function rejectForm(Pengaduan $pengaduan)
+    public function rejectForm($id,Pengaduan $pengaduan)
     {
-        return view($this->viewLocationBO . "/pengaduan/rejectForm", $pengaduan);
+        $pengaduan = Pengaduan::find($id);
+        $divisi = new Divisi();
+        $alldivisi = $divisi->getDivisionAttribute();
+
+        $data =[
+            'pengaduan' => $pengaduan,
+            'divisi' => $alldivisi
+        ];
+
+        return view($this->viewLocationBO . "/pengaduan/rejectForm", compact("data"));
+
     }
 
     public function reject(Request $request, Pengaduan $pengaduan)
     {
+        $validator = Validator::make($request->all(), [
+            'detail' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $pengaduan = Pengaduan::find($request['pengaduan_id']);
+        $pengaduan->status = 'Reject';
+        $pengaduan->save();
+
+        $tindakan = Tindakan::create([
+            'pengaduan_id' => $pengaduan->pengaduan_id,
+            'user_id' => $request['users']
+        ]);
+
+        return redirect()
+            ->route('pengaduan')
+            ->with('success', 'Pelaporan telah di Reject ');
+
     }
 
     /**

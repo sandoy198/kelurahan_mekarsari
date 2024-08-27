@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengaduan;
 use App\Models\Tindakan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class TindakanController extends Controller
@@ -43,6 +44,11 @@ class TindakanController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        if ($request['foto']) {
+            $file = $request['foto'];
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('images/tindakan', $filename, 'public');
+        }
 
         $pengaduan = Pengaduan::find($request['pengaduan_id']);
         $pengaduan->status = 'Selesai';
@@ -50,6 +56,8 @@ class TindakanController extends Controller
 
         $tindakan = Tindakan::where("pengaduan_id", $pengaduan->pengaduan_id)->first();
         $tindakan->detail = $request['detail'];
+        $tindakan->foto_nama = $file->getClientOriginalName();
+        $tindakan->foto_nama_store = $filename;
         $tindakan->save();
 
         return redirect()
@@ -98,4 +106,19 @@ class TindakanController extends Controller
             ->route('pengaduan')
             ->with('success', 'Pelaporan telah di Reject Tindakan ');
     }
+
+    public function downloadImage($tindakan_id)
+    {
+        $tindakan = Tindakan::find($tindakan_id);
+
+        dd($tindakan->toArray());
+        $filePath = 'images/tindakan/' . $tindakan['foto_nama_store'];
+        if (Storage::disk('public')->exists($filePath)) {
+            $path = Storage::disk('public')->path($filePath);
+            return response()->download($path, $tindakan['foto_nama']);
+        }
+
+        return redirect()->back()->with('error', 'File not found.');
+    }
+
 }

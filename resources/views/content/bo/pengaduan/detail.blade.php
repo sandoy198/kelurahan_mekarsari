@@ -2,6 +2,10 @@
     $isNavbar = false;
     $pengaduan = $data['pengaduan'];
     $tindakan = $data['tindakan'];
+
+    use Carbon\Carbon;
+    Carbon::setLocale('id');
+
 @endphp
 
 @extends('layouts/contentNavbarLayout')
@@ -23,6 +27,11 @@
                                 <div class="card-body">
                                     <div class="card-header d-flex align-items-center justify-content-between">
                                         <h5 class="mb-0">Detail Pengaduan</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <label class="col text-end " for="basic-default-name">{{Carbon::parse($pengaduan['created_at'])->translatedFormat('l,d F Y')}}</label>
+                                        </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">Nama</label>
@@ -85,6 +94,7 @@
                                                     <th class="col-1">#</th>
                                                     <th class="col-2">Divisi Tujuan</th>
                                                     <th class="col-1">Penanggung Jawab</th>
+                                                    <th class="col-1">Foto Pengerjaan</th>
                                                     <th class="col">Detail</th>
                                                 </tr>
                                             </thead>
@@ -98,6 +108,7 @@
                                                             <th scope="row">{{ $counter++ }}</th>
                                                             <td> {{ $item['divisiName'] }}</td>
                                                             <td> {{ $item->user['name'] }}</td>
+                                                            <td> <a href="{{ route('download.tindakan.image', ['tindakan_id' => $item['pengaduan_id']]) }}">{{ $item['foto_nama'] }}</a></td>
                                                             <td> {{ $item['detail'] }}</td>
                                                         </tr>
                                                     @endforeach

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Divisi;
 use App\Models\Pengaduan;
 use App\Models\Tindakan;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +24,7 @@ class PengaduanController extends Controller
         // dd($user);
         if ($user['role_id'] == 0) {
         }
-        $pengaduanList = Pengaduan::paginate(10);
+        $pengaduanList = Pengaduan::all();
 
         $data = [
             "pengaduanList" => $pengaduanList
@@ -67,7 +66,7 @@ class PengaduanController extends Controller
         if ($request['foto']) {
             $file = $request['foto'];
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('images/pengaduan', $filename, 'public');
+            $file->storeAs('images/pengaduan', $filename, 'public');
         }
 
         $pengaduan = Pengaduan::create([

@@ -76,10 +76,17 @@
                                     </div>
                                     <hr class="my-4 mx-n4">
 
-                                    <form action="/BO/Tindakan/Approve" method="post">
+                                    <form action="/BO/Tindakan/Approve" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="pengaduan_id" value="{{$pengaduan['pengaduan_id']}}">
                                         <div class="row mb-3">
+                                            <div class="row mb-3">
+                                                <label for="formFile" class="col-form-label col-sm-2 ">Foto Tindakan</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="file" id="formFile" name="foto" value="{{ old('foto') }}">
+                                                </div>
+                                            </div>
+
                                             <label class="col-sm-2 col-form-label" for="basic-default-message">Hasil Tindakan</label>
                                             <div class="col-sm-10">
                                                 <textarea name="detail" id="basic-default-message" class="form-control"

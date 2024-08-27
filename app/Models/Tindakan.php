@@ -16,7 +16,9 @@ class Tindakan extends Model
     protected $fillable = [
         'pengaduan_id',
         'user_id',
-        'detail'
+        'detail',
+        'foto_nama',
+        'foto_nama_store',
     ];
 
     public function user(): BelongsTo

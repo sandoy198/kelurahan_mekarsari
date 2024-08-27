@@ -51,7 +51,8 @@
                     <p> Rajeg adalah sebuah kecamatan yang terletak di Kabupaten Tangerang, Provinsi Banten, Indonesia.
                         Kecamatan Rajeg memiliki luas wilayah 61.059 ha. Kecamatan Rajeg berbatasan dengan KecamatanMauk di
                         Utara dan dengan Kecamatan Pasar Kemis di selatan. </p>
-                    <p>Pusat pemerintahan kecamatan ini berada di Desa Mekarsari, walaupun ada yang sudah menjadi status kelurahan, yaitu Kelurahan Sukatani.
+                    <p>Pusat pemerintahan kecamatan ini berada di Desa Mekarsari, walaupun ada yang sudah menjadi status
+                        kelurahan, yaitu Kelurahan Sukatani.
 
                         Kecamatan ini terdiri dari 1 kelurahan dan 12 desa, yaitu:
 
@@ -68,7 +69,7 @@
                         Desa Sukasari
                         Desa Mekarsari
                         Desa Lembangsari</p>
-                    </div>
+                </div>
                 <div class="col-lg-6">
                     <img src="{{ asset('assets/img/front-pages/landing-page/aboutus.jpg') }}" class="img-fluid"
                         alt="About us">

@@ -28,6 +28,7 @@ Route::get('/BO/Tindakan/Approve/{id}', [TindakanController::class,'approveForm'
 Route::post('/BO/Tindakan/Approve', [TindakanController::class,'approve'])->middleware('auth')->name("tindakan.approve.post");
 Route::get('/BO/Tindakan/Reject/{id}', [TindakanController::class,'rejectForm'])->middleware('auth')->name("rejecttindakan");
 Route::post('/BO/Tindakan/Reject', [TindakanController::class,'reject'])->middleware('auth')->name("tindakan.reject.post");
+Route::get('/download/{tindakan_id}', [TindakanController::class, 'downloadImage'])->name('download.tindakan.image');
 
 //punya masyarakat
 Route::get('/', [HomeController::class,'indexMasyarakat'])->name("indexMasyarakat");

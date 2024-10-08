@@ -11,6 +11,12 @@
       "name": "Pengaduan",
       "icon": "menu-icon tf-icons bx bx-file-blank",
       "slug": "pengaduan"
+    },
+    {
+      "url": "/BO/Laporan",
+      "name": "Laporan",
+      "icon": "menu-icon tf-icons bx bx-file-blank",
+      "slug": "laporan"
     }
 ]
 }

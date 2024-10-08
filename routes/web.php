@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginContoller;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\TindakanController;
+use App\Http\Controllers\LaporanController;
 
 
 //punya back office
@@ -29,6 +30,9 @@ Route::post('/BO/Tindakan/Approve', [TindakanController::class,'approve'])->midd
 Route::get('/BO/Tindakan/Reject/{id}', [TindakanController::class,'rejectForm'])->middleware('auth')->name("rejecttindakan");
 Route::post('/BO/Tindakan/Reject', [TindakanController::class,'reject'])->middleware('auth')->name("tindakan.reject.post");
 Route::get('/download/{tindakan_id}', [TindakanController::class, 'downloadImage'])->name('download.tindakan.image');
+
+Route::get('/BO/Laporan', [LaporanController::class,'index'])->middleware('auth')->name('laporan');
+Route::post('/BO/Laporan', [LaporanController::class,'index'])->middleware('auth')->name('laporan.post');
 
 //punya masyarakat
 Route::get('/', [HomeController::class,'indexMasyarakat'])->name("indexMasyarakat");

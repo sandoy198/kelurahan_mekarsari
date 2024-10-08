@@ -111,7 +111,6 @@ class TindakanController extends Controller
     {
         $tindakan = Tindakan::find($tindakan_id);
 
-        dd($tindakan->toArray());
         $filePath = 'images/tindakan/' . $tindakan['foto_nama_store'];
         if (Storage::disk('public')->exists($filePath)) {
             $path = Storage::disk('public')->path($filePath);
